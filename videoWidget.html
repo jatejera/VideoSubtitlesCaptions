@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-IE">
+
+    <head>
+
+        <title>Video.js | HTML5 Video Player</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv='cache-control' content='no-cache'>
+        <meta http-equiv='expires' content='0'>
+        <meta http-equiv='pragma' content='no-cache'>
+        <meta charset="utf-8" />
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <link src="/allbrowsersresources/styles.css" rel="stylesheet">
+
+        <style id="some">
+        </style>
+
+
+    </head>
+
+    <body>
+
+        <figure id="videoContainer" data-fullscreen="false" style="display: none">
+            <video id="video2" controls preload="metadata">
+                <source src="http://vpscognimed.com/video/ada17/Bergenstal_Webcast_07_14_17.mp4" type="video/mp4">
+                <track id="gertrack" label="German" kind="subtitles"  srclang="de" src="http://cgmeducation.net/webcast/smartvideo/translation/Bergenstal_Webcast-de.vtt" default>
+                <track id="gertrack" label="German2" kind="subtitles"  srclang="de" src="http://cgmeducation.net/webcast/smartvideo/translation/Bergenstal_Webcast-de2.vtt" default>
+            </video>
+        </figure>
+
+        <figure id="forInternetExplorer" data-fullscreen="false" style="display: none">
+
+            <video id="IEVideo" class="video-js vjs-default-skin vjs-fluid" controls preload="none" data-setup='{"fluid": true}'>
+                <!--       <video id="IEVideo" class="video-js vjs-default-skin vjs-fluid" controls preload="none" poster="http://vjs.zencdn.net/v/oceans.png" data-setup='{"fluid": true}'>-->
+                <source src="http://vpscognimed.com/video/ada17/Bergenstal_Webcast_07_14_17.mp4" type="video/mp4">
+                <track kind="subtitles" src="http://cgmeducation.net/webcast/smartvideo/translation/Bergenstal_Webcast-de2.vtt" srclang="de" label="German" default>
+                <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a> href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+            </video>
+        </figure>
+
+
+
+    </body>
+
+
+
+    <script>
+        $(document).ready(function() {
+
+            //    
+            //    var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+            //    // Firefox 1.0+
+            //    var isFirefox = typeof InstallTrigger !== 'undefined';
+            //    // Safari 3.0+
+            //    var isSafari = /constructor/i.test(window.HTMLElement) || (function(p) {
+            //        return p.toString() === "[object SafariRemoteNotification]";
+            //    })(!window['safari'] || safari.pushNotification);
+            //    // Internet Explorer 6-11
+            var isIE = /*@cc_on!@*/ false || !!document.documentMode;
+            // Edge 20+
+            var isEdge = !isIE && !!window.StyleMedia;
+            //    // Chrome 1+
+            //    var isChrome = !!window.chrome && !!window.chrome.webstore;
+            //    // Blink engine detection
+            //    var isBlink = (isChrome || isOpera) && !!window.CSS;
+
+            var isiPad = navigator.userAgent.match(/iPad/i) != null;
+
+
+
+
+            if (isIE || isEdge) {
+
+                //        alert("internet Explorer");
+
+                var ieCss = document.createElement('link');
+                ieCss.href = './internetexplorerresources/video-js.css';
+                ieCss.rel = "stylesheet";
+                $('head').append(ieCss);
+
+                var script1 = document.createElement('script');
+                script1.src = './internetexplorerresources/videojs-ie8.min.js';
+                $('head').append(script1);
+
+                var script2 = document.createElement('script');
+                script2.src = './internetexplorerresources/video.js';
+                $('head').append(script2);
+
+                $('#forInternetExplorer').show();
+
+            } else {
+
+
+                var allBrowsersCss = document.createElement('link');
+                allBrowsersCss.href = './allbrowsersresources/styles.css';
+                allBrowsersCss.rel = "stylesheet";
+                $('head').append(allBrowsersCss);
+
+                $('#videoContainer').show()
+
+
+            }
+
+
+            //          if(!isiPad){
+            //              
+            //              alert("This is not an ipad");
+            //              
+            //          }
+            //            if(isiPad){
+            //                
+            //                
+            //              alert("This is an ipad");
+            //          }
+
+
+
+
+
+
+            $('video#video2').bind('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(e) {
+                var state = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
+                var event = state ? 'FullscreenOn' : 'FullscreenOff';
+
+                var s = document.createElement("style");
+
+                console.log(event);
+
+                if (event == 'FullscreenOn') {
+                    s.id = "cueFormat";
+                    s.type = "text/css";
+                    s.innerHTML = "::cue  {" +
+                        "font-size: 2rem;" +
+                        "}";
+
+                }
+
+                if (event == 'FullscreenOff') {
+
+                    $('#cueFormat').remove();
+
+                }
+
+                document.head.appendChild(s);
+
+            })
+
+
+
+
+            //    
+            //    $(document).ready(function(){
+            //        
+            //        
+            //       
+            //        
+            //        
+            //        videojs('some').delay(6000).load(function() {
+            //        
+            //        console.log(this.options());
+            //
+            //        var myPlayer = this,
+            //            id = myPlayer.id();
+            //
+            //        var aspectRatio = 264 / 640;
+            //
+            //        function resizeVideoJS() {
+            //            var width = document.getElementById(id).parentElement.offsetWidth;
+            //            myPlayer.width(width).height(width * aspectRatio);
+            //        }
+            //        resizeVideoJS();
+            //        window.onresize = resizeVideoJS;
+            //
+            //    });
+
+
+
+        });
+    </script>
+
+
+    <!--
+cgmEDUCATION.net Video Translation (Subtitles/Captions). 
+Features: 
+- Dynamically Detects and fetches JavaScript and CSS dependencies depending on the browser.
+- Utilizes Video.js on Edge and Internet Explorer.
+- Utilizes native WebVTT for all other modern browsers on both mobile and Desktop environments
+
+Created on: 05.04.18
+by: Julian A Tejera
+-->
+
+
+</html>
