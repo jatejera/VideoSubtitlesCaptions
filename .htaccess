@@ -1,3 +1,10 @@
 
+RewriteEngine On
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+	Header set Access-Control-Allow-Credentials true
+</IfModule>
+
 AddType text/vtt .vtt
 AddType video/mp4 .mp4
