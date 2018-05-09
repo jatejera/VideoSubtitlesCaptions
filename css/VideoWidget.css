@@ -1,4 +1,4 @@
-.embed-responsive {
+.VSC-video-container-embed-responsive {
     position: relative;
     display: block;
     height: 0;
@@ -6,11 +6,11 @@
     overflow: hidden;
 }
 
-.embed-responsive .embed-responsive-item,
-.embed-responsive iframe,
-.embed-responsive embed,
-.embed-responsive object,
-.embed-responsive video {
+.VSC-video-container-embed-responsive .VSC-video-container-embed-responsive-item,
+.VSC-video-container-embed-responsive iframe,
+.VSC-video-container-embed-responsive embed,
+.VSC-video-container-embed-responsive object,
+.VSC-video-container-embed-responsive video {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -20,10 +20,10 @@
     border: 0;
 }
 
-.embed-responsive-16by9 {
+.VSC-video-container-embed-responsive-16by9 {
     padding-bottom: 56.25%;
 }
 
-.embed-responsive-4by3 {
+.VSC-video-container-embed-responsive-4by3 {
     padding-bottom: 75%;
 }

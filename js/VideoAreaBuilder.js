@@ -1,0 +1,2 @@
+var VSVVideoArea = document.getElementById("VSV-Video-Area");
+VSVVideoArea.innerHTML = '<div class="VSC-video-container"><div class="row"><div class="col-sm-12"><div class="VSC-video-container-embed-responsive VSC-video-container-embed-responsive-16by9" ><iframe class="VSC-video-container-embed-responsive-item" src="./videoWidget.php" frameborder="0" allowfullscreen></iframe> </div></div></div></div>';
