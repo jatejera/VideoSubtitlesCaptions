@@ -63,11 +63,22 @@ if($video_ID == "Bergenstal"){
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
         <link src="/allbrowsersresources/styles.css" rel="stylesheet">
 
-        <style id="some">
-
-
+        <style>
+        html, body {
+	margin:0;
+	padding:0;
+	width:100%;
+	height:100%;
+}
+            
+            #VSC-video-container-for-IE, #VSC-video-container-all-browsers{
+                margin:0;
+                padding: 0;
+                
+            }
+        
         </style>
-
+   
 
     </head>
 
