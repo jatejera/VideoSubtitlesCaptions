@@ -14,14 +14,6 @@ $video_Lang = $_GET['lang'] ? $_GET['lang'] : "all";
 
 
 
-//            REMOTE LOCATION
-//                <source src="http://vpscognimed.com/video/ada17/Bergenstal_Webcast_07_14_17.mp4" type="video/mp4">
-//                <track id="gertrack" label="German" kind="subtitles"  srclang="de" src="http://cgmeducation.net/webcast/smartvideo/translation/Bergenstal_Webcast-de.vtt" default>
-//                <track id="gertrack" label="German2" kind="subtitles"  srclang="de" src="http://cgmeducation.net/webcast/smartvideo/translation/Bergenstal_Webcast-de2.vtt" default>
-
-
-
-
 if($video_ID == "Bergenstal"){
     
     $video_source = '<source src="../../simple-embed/videos/Bergenstal_Webcast_07_14_17_3.mp4" type="video/mp4">';
@@ -64,21 +56,23 @@ if($video_ID == "Bergenstal"){
         <link src="/allbrowsersresources/styles.css" rel="stylesheet">
 
         <style>
-        html, body {
-	margin:0;
-	padding:0;
-	width:100%;
-	height:100%;
-}
-            
-            #VSC-video-container-for-IE, #VSC-video-container-all-browsers{
-                margin:0;
+            html,
+            body {
+                margin: 0;
                 padding: 0;
-                
+                width: 100%;
+                height: 100%;
             }
-        
+
+            #VSC-video-container-for-IE,
+            #VSC-video-container-all-browsers {
+                margin: 0;
+                padding: 0;
+
+            }
+
         </style>
-   
+
 
     </head>
 
@@ -167,6 +161,8 @@ if($video_ID == "Bergenstal"){
                 $('head').append(script2);
 
                 $('#VSC-video-container-for-IE').show();
+                var vid = $("#VSC-video-container-IEVideo");
+
 
             } else {
 
@@ -177,6 +173,7 @@ if($video_ID == "Bergenstal"){
                 $('head').append(allBrowsersCss);
 
                 $('#VSC-video-container-all-browsers').show()
+                var vid = $("#VSC-video-container-all-browsers-video");
 
 
             }
@@ -225,6 +222,71 @@ if($video_ID == "Bergenstal"){
                 document.head.appendChild(s);
 
             })
+
+
+
+
+            // OPTION FOR SENDING THE CURRENT VIDEO TIME TO PARENT BROWSER.
+            var timeUpdate = false;
+
+            // addEventListener support for IE8
+            function bindEvent(element, eventName, eventHandler) {
+                if (element.addEventListener) {
+                    element.addEventListener(eventName, eventHandler, false);
+                } else if (element.attachEvent) {
+                    element.attachEvent('on' + eventName, eventHandler);
+                }
+            }
+
+
+
+            // Send a message to the parent
+            var sendMessage = function(msg) {
+                window.parent.postMessage(msg, '*');
+            };
+
+
+            // Listen to messages from parent window
+            bindEvent(window, 'message', function(input) {
+
+                if (input.data == "timeUpdate") {
+                    timeUpdate = true;
+                    console.log("Time Update Activated");
+                }
+
+            });
+
+
+            // Send random message data on every button click
+            function respond(message) {
+                sendMessage(message);
+            };
+
+
+
+
+            vid.on("timeupdate", function() {
+
+                if (timeUpdate == true) {
+                    
+//                    console.log(vid)
+                    var data = {
+                        ended: vid[0].ended,
+                        currentTime: vid[0].currentTime,
+                        duration: vid[0].duration
+                    }
+                    
+                    
+                    sendMessage(data);
+                    
+                }
+
+            });
+
+
+
+
+
 
 
         });
