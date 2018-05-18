@@ -87,7 +87,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="VSC-video-container-embed-responsive VSC-video-container-embed-responsive-16by9">
-                        <iframe class="VSC-video-container-embed-responsive-item" id="VSC-video-container-embed-responsive-item" src="./videoWidget.php?id=Bergenstal&lang=all" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="VSC-video-container-embed-responsive-item" id="VSC-video-container-embed-responsive-item" src="./videoWidget.php?id=Bergenstal&lang=french&autoplay=false" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                     </div>
                 </div>
             </div>
@@ -280,7 +280,7 @@
         
         var x = <?php echo $_GET['sub']; ?> + "";
         if ((parseInt($('#timeObserver').attr('duration')) - parseInt($('#timeObserver').attr('currentTime'))) < 10) {
-//            if (<?php //echo $_GET['id']; ?> == 1) {
+
                 switch (x) {
                     case "1":
                         $(".up-next").html("<span class='shadow-text'>Coming up in " + Math.round((parseInt($('#timeObserver').attr('duration')) - parseInt($('#timeObserver').attr('currentTime')))) + "... Stanley E. Althof, PhD, IF</span>");
@@ -295,23 +295,8 @@
                         break;
                 }
 
-//                if ($(".up-next").hasClass("open")) {
-//
-//                } else {
-//                    $(".up-next").slideToggle(400);
-//                }
-
-          //  }
             $(".up-next").addClass("open");
         }
-
-
-        //        if ((parseInt($('#timeObserver').attr('duration')) - parseInt($('#timeObserver').attr('currentTime'))) < 3) {
-        //            nextvideo();
-        //        }
-
-
-
 
 
     };

@@ -13,20 +13,24 @@ $video_ID = $_GET['id'];
 $video_Lang = $_GET['lang'] ? $_GET['lang'] : "all";
 
 
+// IF AUTOPLAY GET VARIABLE IS SET TO "TRUE", THE VIDEO WILL AUTOPLAY ON LOAD
+$autoplay = $_GET['autoplay'] ? $_GET['autoplay'] : "false";
+
+
 
 if($video_ID == "Bergenstal"){
     
-    $video_source = '<source src="../../simple-embed/videos/Bergenstal_Webcast_07_14_17_3.mp4" type="video/mp4">';
+    $video_source = '<source src="../../simple-embed/videos/Bergenstal_Webcast_07_14_17.mp4" type="video/mp4">';
     
     switch($video_Lang){
-        case "german":
-            $video_track[0] = '<track kind="subtitles" src="http://localhost/simple-embed/translation/Bergenstal_Webcast-de.vtt" srclang="de" label="German" default>';
+        case "french":
+            $video_track[0] = '<track kind="subtitles" src="../../simple-embed/translation/BergenstalFrenchCanadian.vtt" srclang="fr" label="French" default>';
             break;
         case "german2":
             $video_track[0] = '<track kind="subtitles" src="http://localhost/simple-embed/translation/Bergenstal_Webcast-de2.vtt" srclang="de" label="German2" default>';
             break;
         default:
-             $video_track[0] = '<track kind="subtitles" src="http://localhost/simple-embed/translation/Bergenstal_Webcast-de2.vtt" srclang="de" label="German" default>';
+             $video_track[0] = '<track kind="subtitles" src="http://localhost/simple-embed/translation/BergenstalFrenchCanadian.vtt" srclang="fr" label="French" default>';
             $video_track[1] = '<track kind="subtitles" src="http://localhost/simple-embed/translation/Bergenstal_Webcast-de.vtt" srclang="de" label="German2" default>';
     }
     
@@ -162,6 +166,8 @@ if($video_ID == "Bergenstal"){
 
                 $('#VSC-video-container-for-IE').show();
                 var vid = $("#VSC-video-container-IEVideo");
+                
+                
 
 
             } else {
@@ -222,7 +228,10 @@ if($video_ID == "Bergenstal"){
                 document.head.appendChild(s);
 
             })
-
+            
+            
+            
+        
 
 
 
@@ -282,6 +291,18 @@ if($video_ID == "Bergenstal"){
                 }
 
             });
+            
+            
+            // PLAYS VIDEO IF AUTOPLAY IS ENABLED
+            <?php if($autoplay == "true") : ?>
+            setTimeout(function(){
+                
+                vid[0].play();
+                
+            }, 2000);
+            
+            <?php endif ?>
+
 
 
 
